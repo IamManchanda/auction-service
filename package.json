@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "deploy:dev": "sls deploy -v --stage dev",
-    "deploy:prod": "sls deploy -v --stage prod"
+    "deploy:prod": "sls deploy -v --stage prod",
+    "stack:remove": "sls remove -v"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
