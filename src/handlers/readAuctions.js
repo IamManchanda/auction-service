@@ -5,13 +5,13 @@ import httpEventNormalizer from "@middy/http-event-normalizer";
 import httpErrorHandler from "@middy/http-error-handler";
 import createError from "http-errors";
 
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const readAuctions = async (event, context) => {
   let auctions;
 
   try {
-    const result = await dynamoDB
+    const result = await dynamodb
       .scan({
         TableName: process.env.AUCTIONS_TABLE_NAME,
       })
