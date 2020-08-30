@@ -5,32 +5,34 @@ import commonMiddleware from "../lib/commonMiddleware";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-const readAuction = async (event, context) => {
-  let auction;
+const placeBid = async (event, context) => {
+  let updatedAuction;
   const { id } = event.pathParameters;
+  const { amount } = event.body;
   const params = {
     TableName: process.env.AUCTIONS_TABLE_NAME,
     Key: {
       id,
     },
+    UpdateExpression: "set highest_bid.amount = :amount",
+    ExpressionAttributeValues: {
+      ":amount": amount,
+    },
+    ReturnValues: "ALL_NEW",
   };
 
   try {
-    const result = await dynamodb.get(params).promise();
-    auction = result.Item;
+    const result = await dynamodb.update(params).promise();
+    updatedAuction = result.Attributes;
   } catch (error) {
     console.error(error);
     throw new createError.InternalServerError(error);
   }
 
-  if (!auction) {
-    throw new createError.NotFound(`Auction with ID "${id}" not found`);
-  }
-
   return {
     statusCode: 200,
-    body: JSON.stringify(auction),
+    body: JSON.stringify(updatedAuction),
   };
 };
 
-export const handler = commonMiddleware(readAuction);
+export const handler = commonMiddleware(placeBid);

@@ -14,15 +14,17 @@ const createAuction = async (event, context) => {
     title,
     status: "Open",
     created_at: now.toISOString(),
+    highest_bid: {
+      amount: 0,
+    },
+  };
+  const params = {
+    TableName: process.env.AUCTIONS_TABLE_NAME,
+    Item: auction,
   };
 
   try {
-    await dynamodb
-      .put({
-        TableName: process.env.AUCTIONS_TABLE_NAME,
-        Item: auction,
-      })
-      .promise();
+    await dynamodb.put(params).promise();
   } catch (error) {
     console.error(error);
     throw new createError.InternalServerError(error);
