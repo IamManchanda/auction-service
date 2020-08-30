@@ -17,6 +17,7 @@ const createAuction = async (event, context) => {
     status: "Open",
     created_at: now.toISOString(),
   };
+
   try {
     await dynamoDB
       .put({
