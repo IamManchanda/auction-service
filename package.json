@@ -20,6 +20,7 @@
     "webpack": "^4.44.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.734.0"
+    "aws-sdk": "^2.734.0",
+    "uuid": "^8.3.0"
   }
 }
