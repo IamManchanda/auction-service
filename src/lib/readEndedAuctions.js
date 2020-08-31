@@ -16,6 +16,7 @@ export default async () => {
       "#status": "status",
     },
   };
+
   const result = await dynamodb.query(params).promise();
   return result.Items;
 };
