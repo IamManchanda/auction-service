@@ -22,13 +22,13 @@
   },
   "dependencies": {
     "@middy/core": "^1.2.0",
-    "@middy/http-error-handler": "^1.2.0",
     "@middy/http-event-normalizer": "^1.2.0",
     "@middy/http-json-body-parser": "^1.2.0",
     "@middy/validator": "^1.2.0",
     "@types/aws-lambda": "^8.10.61",
     "aws-sdk": "^2.734.0",
     "http-errors": "^1.8.0",
+    "middy-middleware-json-error-handler": "^2.0.6",
     "uuid": "^8.3.0"
   }
 }
