@@ -10,6 +10,7 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const createAuction = async (event, context) => {
   const { title } = event.body;
+  const { email } = event.requestContext.authorizer;
   const startTime = new Date();
   const endTime = new Date();
   endTime.setHours(startTime.getHours() + 1);
@@ -23,6 +24,7 @@ const createAuction = async (event, context) => {
     highest_bid: {
       amount: 0,
     },
+    seller: email,
   };
   const params = {
     TableName: process.env.AUCTIONS_TABLE_NAME,
