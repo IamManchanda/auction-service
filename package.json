@@ -6,8 +6,6 @@
   "license": "MIT",
   "scripts": {
     "deploy:dev": "sls deploy -v --stage dev",
-    "deploy:prod": "sls deploy -v --stage prod",
-    "deploy:all": "npm run deploy:dev && npm run deploy:prod",
     "stack:remove": "sls remove -v"
   },
   "devDependencies": {
