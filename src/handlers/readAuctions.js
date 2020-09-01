@@ -3,7 +3,7 @@ import createError from "http-errors";
 import validator from "@middy/validator";
 
 import commonMiddleware from "../lib/commonMiddleware";
-import readAuctionSchema from "../lib/schemas/readAuctionSchema";
+import readAuctionsSchema from "../lib/schemas/readAuctionsSchema";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -39,7 +39,7 @@ const readAuctions = async (event, context) => {
 
 export const handler = commonMiddleware(readAuctions).use(
   validator({
-    inputSchema: readAuctionSchema,
+    inputSchema: readAuctionsSchema,
     useDefaults: true,
   }),
 );
