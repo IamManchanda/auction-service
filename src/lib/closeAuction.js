@@ -23,13 +23,27 @@ export default async (auction) => {
   const { title, seller, highest_bid } = auction;
   const { amount, bidder } = highest_bid;
 
+  if (amount === 0) {
+    await sqs
+      .sendMessage({
+        QueueUrl: process.env.MAIL_QUEUE_URL,
+        MessageBody: JSON.stringify({
+          recipient: seller,
+          subject: "No bids on your auction item :(",
+          body: `Oh no! Your item "${title}" didn't get any bids. Better luck next time!`,
+        }),
+      })
+      .promise();
+    return;
+  }
+
   const notifySeller = sqs
     .sendMessage({
       QueueUrl: process.env.MAIL_QUEUE_URL,
       MessageBody: JSON.stringify({
         recipient: seller,
         subject: "Your item has been sold!",
-        body: `Wohoo! Your item "${title}" has been sold for $${amount}`,
+        body: `Wohoo! Your item "${title}" has been sold for $${amount}.`,
       }),
     })
     .promise();
@@ -40,7 +54,7 @@ export default async (auction) => {
       MessageBody: JSON.stringify({
         recipient: bidder,
         subject: "You won an auction!",
-        body: `What a Great Deal! You got yourself a "${title}" for $${amount}`,
+        body: `What a Great Deal! You got yourself a "${title}" for $${amount}.`,
       }),
     })
     .promise();
