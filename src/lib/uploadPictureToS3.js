@@ -12,5 +12,5 @@ export default async (key, body) => {
       ContentType: "image/jpeg",
     })
     .promise();
-  return result;
+  return result.Location;
 };
