@@ -1,4 +1,3 @@
-import AWS from "aws-sdk";
 import middy from "@middy/core";
 import jsonErrorHandler from "middy-middleware-json-error-handler";
 import createError from "http-errors";
