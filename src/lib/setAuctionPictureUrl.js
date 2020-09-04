@@ -8,7 +8,7 @@ export default async (id, pictureUrl) => {
     Key: {
       id,
     },
-    UpdateExpression: "set picture_url = :pictureUrl",
+    UpdateExpression: "set pictureUrl = :pictureUrl",
     ExpressionAttributeValues: {
       ":pictureUrl": pictureUrl,
     },

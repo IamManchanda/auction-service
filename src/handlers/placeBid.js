@@ -20,7 +20,7 @@ const placeBid = async (event, context) => {
   }
 
   // Avoid Double Bidding
-  if (email === auction.highest_bid.bidder) {
+  if (email === auction.highestBid.bidder) {
     throw new createError.Forbidden("You are already the highest bidder");
   }
 
@@ -30,9 +30,9 @@ const placeBid = async (event, context) => {
   }
 
   // Bid Amount Validation
-  if (amount <= auction.highest_bid.amount) {
+  if (amount <= auction.highestBid.amount) {
     throw new createError.Forbidden(
-      `Your bid must be higher than ${auction.highest_bid.amount}`,
+      `Your bid must be higher than ${auction.highestBid.amount}`,
     );
   }
 
@@ -43,7 +43,7 @@ const placeBid = async (event, context) => {
       id,
     },
     UpdateExpression:
-      "set highest_bid.amount = :amount, highest_bid.bidder = :bidder",
+      "set highestBid.amount = :amount, highestBid.bidder = :bidder",
     ExpressionAttributeValues: {
       ":amount": amount,
       ":bidder": email,

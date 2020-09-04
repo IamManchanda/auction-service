@@ -20,8 +20,8 @@ export default async (auction) => {
 
   await dynamodb.update(params).promise();
 
-  const { title, seller, highest_bid } = auction;
-  const { amount, bidder } = highest_bid;
+  const { title, seller, highestBid } = auction;
+  const { amount, bidder } = highestBid;
 
   if (amount === 0) {
     await sqs

@@ -7,7 +7,7 @@ export default async () => {
   const params = {
     TableName: process.env.AUCTIONS_TABLE_NAME,
     IndexName: "statusAndEndTime",
-    KeyConditionExpression: "#status = :status AND ending_at <= :now",
+    KeyConditionExpression: "#status = :status AND endingAt <= :now",
     ExpressionAttributeValues: {
       ":status": "OPEN",
       ":now": now.toISOString(),
